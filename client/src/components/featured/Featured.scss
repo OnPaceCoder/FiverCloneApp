@@ -1,0 +1,95 @@
+.featured {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    background-color: #013914;
+    color: white;
+
+    .container{
+        display: flex;
+        align-items: center;  
+
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .h1{
+                font-size: 32px;
+                i{
+                    font-weight: 200;
+                }
+            }
+
+
+            .search{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: white;
+
+                .searchInputs{
+                    display: flex;
+                    align-items: center;
+                    gap:10px; 
+                    img{
+                        width: 20px;
+                        height: 20px;
+                        margin:10px
+                    }
+                    input{
+                        border: none;
+                        outline: none;
+                    }
+                }
+                button{
+                    width: 120px;
+                    height: 50px;
+                    border: none;
+                    background-color: #1dbf73;
+                    color: white;
+                    cursor: pointer;
+    ;
+                }
+            }
+            .popular{
+                display:flex;
+                align-items: center;
+                gap: 10px;
+                    span{
+
+                    }
+
+                    button{
+                        color: white;
+                        background: transparent;
+                        padding: 10px 20px;
+                        border: 1px solid white;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        &:hover {
+                            background-color: white;
+                            color: black;
+                        }
+
+                    }
+
+
+                }
+               
+        }
+        
+        .right{
+            height: 100%;
+            img{
+                height: 100%;
+                object-fit: contain;
+                }
+            }
+
+    }
+
+
+}
