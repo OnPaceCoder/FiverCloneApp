@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Featured.scss"
+import TrustedBy from '../trustedBy/TrustedBy'
 const Featured = () => {
     return (
         <div className='featured'>
@@ -24,6 +25,8 @@ const Featured = () => {
                 <div className="right">
                     <img src="./img/man.png" alt="" />
                 </div>
+
+
             </div>
         </div>
     )

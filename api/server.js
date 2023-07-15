@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { ErrorHandler } from "./utils/createError";
+import { ErrorHandler } from "./utils/createError.js";
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
 const app = express();
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
 
-app.use(ErrorHandler())
+app.use(ErrorHandler)
 
 
 app.listen(8000, () => {

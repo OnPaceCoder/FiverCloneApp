@@ -11,6 +11,7 @@ const register = async (req, res) => {
             ...req.body,
             password: hash,
         });
+        console.log(newUser)
         await newUser.save();
         res.status(201).json("User registered successfully")
     }
