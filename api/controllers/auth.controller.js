@@ -11,7 +11,7 @@ const register = async (req, res) => {
             ...req.body,
             password: hash,
         });
-        console.log(newUser)
+
         await newUser.save();
         res.status(201).json("User registered successfully")
     }
@@ -19,13 +19,14 @@ const register = async (req, res) => {
         throw new Error(err)
     }
 }
-const login = async (req, res) => {
+const login = async (req, res, next) => {
+
     try {
         const user = await User.findOne({ username: req.body.username });
-        if (!user) throw new Error(createError(404, "User not found"))
+        if (!user) return next(createError(404, "User not found"))
 
         const isCorrect = bcrypt.compareSync(req.body.password, user.password)
-        if (!isCorrect) throw new Error(createError(400, "Wrong password or username!"))
+        if (!isCorrect) return next(createError(400, "Wrong password or username!"))
 
         const token = jwt.sign({ id: user._id, isSeller: user.isSeller }, process.env.JWT_KEY)
 
@@ -33,7 +34,7 @@ const login = async (req, res) => {
         res.cookie("accessToken", token, { httpOnly: true }).status(200).send(info);
 
     } catch (err) {
-        throw new Error(err)
+        next(err)
     }
 }
 

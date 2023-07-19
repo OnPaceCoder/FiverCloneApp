@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./Navbar.scss"
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import newRequest from "../../utils/newRequest";
 const Navbar = () => {
     const { pathname } = useLocation()
     const [active, setActive] = useState(false)
@@ -9,6 +10,7 @@ const Navbar = () => {
         window.scrollY > 0 ? setActive(true) : setActive(false)
     }
 
+    const navigate = useNavigate()
     useEffect(() => {
         window.addEventListener("scroll", isActive)
         return () => {
@@ -16,11 +18,16 @@ const Navbar = () => {
         }
     }, [])
 
-    const currentUser = {
-        id: 1,
-        username: "John Doe",
-        isSeller: true
+    const handleLogout = async () => {
+        try {
+            await newRequest.post("/auth/logout");
+            localStorage.setItem("currentUser", null)
+            navigate("/")
+        } catch (error) {
+            console.log(err)
+        }
     }
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"))
     return (
         <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
             <div className="container">
@@ -36,12 +43,12 @@ const Navbar = () => {
                     <span>Explore</span>
                     <span>English</span>
                     <span>Sign In</span>
-                    {!currentUser.isSeller && <span>Become a Seller</span>}
+                    {!currentUser?.isSeller && <span>Become a Seller</span>}
                     {!currentUser && <button>Join</button>
                     }
                     {currentUser && (
                         <div className="user" onClick={() => setOpen(!open)}>
-                            <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" alt="" />
+                            <img src={currentUser.img || "/img/noavatar.jpeg"} alt="" />
                             <span>{currentUser?.username}</span>
                             {
                                 open && (
@@ -57,7 +64,7 @@ const Navbar = () => {
 
                                         <Link to={"/orders"} className="link">Orders</Link>
                                         <Link to={"/messages"} className="link">Messages</Link>
-                                        <Link to={"/logout"} className="link">Logout</Link>
+                                        <Link to={"/logout"} className="link" onClick={handleLogout}>Logout</Link>
                                     </div>
                                 )
                             }
