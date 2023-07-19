@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Gig.scss"
+import Reviews from '../../components/reviews/Reviews'
 const Gig = () => {
     return (
         <div className='gig'>
@@ -89,10 +90,33 @@ const Gig = () => {
                                 </div>
                             </div>
                         )}
+                        <Reviews gigId={id} />
+                    </div>
+                    <div className="right">
+                        <div className="price">
+                            <h3>{data.shortTitle}</h3>
+                            <h2>${data.price}</h2></div>                        <p>{data.shortDesc}</p>
+                        <div className="details">
+                            <div className="item">
+                                <img src="/img/clock.png" alt="" />
+                                <span>{data.revisionNumber} Revisions</span>                         </div>
+                        </div>
 
+                        <div className="features">
+                            {data.features.map((feature) => (
+                                <div className="item" key={feature}>
+                                    <img src="/img/greencheck.png" alt="" />
+                                    <span>{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <Link to={`/pay/${id}`}>
+                            <button>Continue</button>
+                        </Link>
                     </div>
                 </div>
             )}
+
         </div>
     )
 }
