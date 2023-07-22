@@ -6,6 +6,7 @@ import cors from "cors";
 import { ErrorHandler } from "./utils/createError.js";
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
+import gigRoute from "./routes/gig.route.js"
 const app = express();
 dotenv.config()
 
@@ -25,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
-
+app.use("/api/gig", gigRoute)
 app.use(ErrorHandler)
 
 

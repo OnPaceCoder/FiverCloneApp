@@ -12,15 +12,22 @@ import Messages from './pages/messages/Messages'
 import Message from './pages/message/Message'
 import Add from './pages/add/Add'
 import './App.scss'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+
 function App() {
+  const queryClient = new QueryClient();
+
 
   const Layout = () => {
     return (
 
       <>
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </QueryClientProvider>
       </>
     )
   }

@@ -42,7 +42,7 @@ const Navbar = () => {
                     <span>Fiverr Business</span>
                     <span>Explore</span>
                     <span>English</span>
-                    <span>Sign In</span>
+                    <Link to={"/login"} className="link"><span>Sign In</span></Link>
                     {!currentUser?.isSeller && <span>Become a Seller</span>}
                     {!currentUser && <button>Join</button>
                     }

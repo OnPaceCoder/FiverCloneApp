@@ -1,37 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Gigs.scss"
 import GigCard from '../../components/gigCard/GigCard'
 import { useQuery } from 'react-query';
 import newRequest from '../../utils/newRequest';
+import { useParams } from 'react-router-dom';
+import { useRef } from 'react';
 const Gigs = () => {
+    const [sort, reSort] = useState("sales");
+
+    const [open, setOpen] = useState(false);
+
+    const minRef = useRef();
+    const maxRef = useRef()
 
 
-    function Gig() {
-        const { id } = useParams();
+    const { id } = useParams();
 
-        const { isLoading, error, data } = useQuery({
-            queryKey: ["gig"],
-            queryFn: () =>
-                newRequest.get(`/gigs/single/${id}`).then((res) => {
-                    return res.data;
-                })
-        })
-    }
-
-    const userId = data?.userId;
-
-    const {
-        isLoading: isLoadingUser,
-        error: errorUser,
-        data: dataUser,
-    } = useQuery({
-        queryKey: ["user"],
+    const { isLoading, error, data } = useQuery({
+        queryKey: ["gig"],
         queryFn: () =>
-            newRequest.get(`/users/${userId}`).then((res) => {
+            newRequest.get(`/gig`).then((res) => {
                 return res.data;
-            }),
-        enabled: !!userId
+            })
     })
+    console.log(data)
+
+    // const userId = data?.userId;
+
+    // const {
+    //     isLoading: isLoadingUser,
+    //     error: errorUser,
+    //     data: dataUser,
+    // } = useQuery({
+    //     queryKey: ["user"],
+    //     queryFn: () =>
+    //         newRequest.get(`/users/${userId}`).then((res) => {
+    //             return res.data;
+    //         }),
+    //     enabled: !!userId
+    // })
 
     return (
         <div className='gigs'>
@@ -47,7 +54,7 @@ const Gigs = () => {
                         <span>Budget</span>
                         <input type="number" ref={minRef} placeholder='min' />
                         <input type="number" ref={maxRef} placeholder='max' />
-                        <button onClick={apply}>Apply</button>
+                        {/* <button onClick={apply}>Apply</button> */}
                     </div>
                     <div className="right">
                         <span className="sortBy">Sort by</span>

@@ -4,10 +4,10 @@ const { Schema } = mongoose;
 
 const GigSchema = new Schema({
     userId: {
-        type: Stirng,
+        type: String,
         required: true,
     },
-    titile: {
+    title: {
         type: String,
         required: true,
     },
