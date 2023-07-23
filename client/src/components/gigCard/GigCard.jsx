@@ -7,7 +7,7 @@ const GigCard = ({ item }) => {
 
 
     const { isLoading, error, data } = useQuery({
-        queryKey: [item.userId],
+        queryKey: [`${item.userId}`],
         queryFn: () =>
             newRequest.get(`/users/${item.userId}`).then((res) => { return res.data })
     })

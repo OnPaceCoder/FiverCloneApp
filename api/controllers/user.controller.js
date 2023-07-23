@@ -16,7 +16,9 @@ const deleteUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     const user = await User.findById(req.params.id);
-    res.status(200).json(user)
+    const { password, ...userData } = user._doc;
+
+    res.status(200).json(userData)
 }
 
 export { deleteUser, getUser }

@@ -1,113 +1,103 @@
-.navbar{
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  transition: 0.5s all ease;
+  background-color: #013914;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  &.active {
+    background-color: white;
+    color: black;
+  }
+
+  .container {
+    width: 1200px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    color: #fff;
-    transition: 0.5s all ease;
-    background-color: #013914;
-    position: sticky;
-    top:0;
-    z-index: 10;
-    &.active {
-        background-color: white;
-        color: black;
+    justify-content: space-between;
+    padding: 20px 0px;
+    .logo {
+      font-size: 34px;
+      cursor: pointer;
+      font-weight: 800;
+
+      .dot {
+        color: #1dbf73;
+      }
     }
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: "Montserrat", "sans-serif";
+      font-weight: 500;
+      button {
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid white;
+        cursor: pointer;
+        background-color: transparent;
 
+        &:hover {
+          background-color: #1dbf73;
+          border-color: #1dbf73;
+        }
+        &.active {
+          background-color: #1dbf73;
+          border-color: #1dbf73;
+        }
+      }
 
-
-    .container {
-        width: 1200px;
-        display:flex;
+      .user {
+        display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding:20px 0px;
-        .logo{
-              font-size: 34px;
-            cursor: pointer;
-            font-weight: 800   ;
-            
-            .dot{
-              
-                color: #1dbf73;
-            }
-        }
-        .links{
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            font-family: "Montserrat" , "sans-serif";
-            font-weight: 500;   
-            button{
-                color:white;
-                padding:10px 20px;
-                border-radius: 5px;
-                border:1px solid white;
-                cursor:pointer;
-                background-color: transparent;
-                
+        gap: 10px;
+        cursor: pointer;
+        position: relative;
 
-                &:hover{
-                    background-color: #1dbf73;
-                    border-color:#1dbf73;
-                }
-            }
-
-            .user{
-                display:flex;
-                align-items: center;
-                gap: 10px;
-                cursor: pointer;
-                position: relative;
-              
-
-
-                img{
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                }
-
-                .options{
-                    position: absolute;
-                    top: 50px;
-                    right: 0px;
-                    padding: 20px;
-                    border-radius: 10px;
-                    background-color: white;
-                    border: 1px solid lightgray;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                    color: gray;
-                    width: 180px;
-                    font-weight: 500;
-                }
-
-            }
-
-
-
-
-
-
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
         }
 
+        .options {
+          position: absolute;
+          top: 50px;
+          right: 0px;
+          padding: 20px;
+          border-radius: 10px;
+          background-color: white;
+          border: 1px solid lightgray;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          color: gray;
+          width: 180px;
+          font-weight: 500;
+        }
+      }
     }
+  }
 
-    hr{
-        width: 1400px;
-        height: 0;
-        border: 0.5px solid lightgray;
-    }
+  hr {
+    width: 1400px;
+    height: 0;
+    border: 0.5px solid lightgray;
+  }
 
-    .menu{
-        width: 1000px;
-        display: flex  ;
-        padding: 10px 0px;
-        justify-content: space-between;
-        color:gray;
-        font-family: "Montserrat" , "sans-serif";
-        font-weight: 300;
-    }
+  .menu {
+    width: 1000px;
+    display: flex;
+    padding: 10px 0px;
+    justify-content: space-between;
+    color: gray;
+    font-family: "Montserrat", "sans-serif";
+    font-weight: 300;
+  }
 }

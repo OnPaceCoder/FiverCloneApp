@@ -1,6 +1,6 @@
 import React from 'react'
 import Review from '../review/Review'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import newRequest from '../../utils/newRequest'
 
 const Reviews = ({ gigId }) => {

@@ -44,7 +44,7 @@ export const getGig = async (req, res, next) => {
 
 
     } catch (error) {
-        next(err);
+        next(error);
 
     }
 }
@@ -54,12 +54,12 @@ export const getGigs = async (req, res, next) => {
     const filters = {
         ...(q.cat && { cat: q.cat }),
         ...(q.userId && { userId: q.userId }),
-        ...((q.min || q.max) && { price: { ...(q.min && { gt: q.min }), ...(q.max && { lt: q.max }) } }),
+        ...((q.min || q.max) && { price: { ...(q.min && { $gte: q.min }), ...(q.max && { $lte: q.max }) } }),
         ...(q.search && { title: { $regex: q.search, $options: "i" } })
 
     }
     try {
-        const gigs = await Gig.find(filters)
+        const gigs = await Gig.find(filters).sort({ [q.sort]: -1 })
         res.status(200).send(gigs)
     } catch (error) {
         next(error)

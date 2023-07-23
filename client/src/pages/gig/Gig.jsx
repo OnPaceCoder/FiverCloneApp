@@ -1,7 +1,40 @@
 import React from 'react'
 import "./Gig.scss"
 import Reviews from '../../components/reviews/Reviews'
+import { Link, useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import newRequest from '../../utils/newRequest'
+import { Slider } from 'infinite-react-carousel'
 const Gig = () => {
+
+    const { id } = useParams()
+
+    const { isLoading, error, data, refetch } = useQuery({
+        queryKey: ["gig"],
+        queryFn: () =>
+            newRequest.get(`/gigs/single/${id}`).then((res) => {
+                return res.data;
+            })
+    })
+
+
+    const userId = data?.userId;
+
+    const {
+        isLoading: isLoadingUser,
+        error: errorUser,
+        data: dataUser,
+    } = useQuery({
+        queryKey: ["user"],
+        queryFn: () =>
+            newRequest.get(`/users/${userId}`).then((res) => {
+                return res.data;
+            }),
+        enabled: !!userId
+
+    })
+
+    console.log(dataUser)
     return (
         <div className='gig'>
             {isLoading ? ("loading") : error ? ("Something went wrong!") : (
@@ -11,12 +44,12 @@ const Gig = () => {
                             Fiverr {">"} Graphics & Design {">"}
                         </span>
                         <h1>{data.title}</h1>
-                        {isLoadingUser ? ("loading")
-                            : errorUser ? ("Something went wrong!") :
+                        {isLoading ? ("loading")
+                            : error ? ("Something went wrong!") :
                                 (
                                     <div className="user">
-                                        <img className='pp' src={dataUser.img || "/img/noavatar.jpg"} alt="" />
-                                        <span>{dataUser.username}</span>
+                                        <img className='pp' src={dataUser?.img || "/img/noavatar.jpg"} alt="" />
+                                        <span>{dataUser?.username}</span>
                                         {!isNaN(data.totalStars / data.starNumber) && (
                                             <div className="stars">
                                                 {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i) => (

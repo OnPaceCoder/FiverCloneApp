@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Gigs.scss"
 import GigCard from '../../components/gigCard/GigCard'
 import { useQuery } from 'react-query';
 import newRequest from '../../utils/newRequest';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useRef } from 'react';
 const Gigs = () => {
     const [sort, reSort] = useState("sales");
@@ -13,32 +13,26 @@ const Gigs = () => {
     const minRef = useRef();
     const maxRef = useRef()
 
-
+    const search = useLocation()
     const { id } = useParams();
 
-    const { isLoading, error, data } = useQuery({
-        queryKey: ["gig"],
+    const { isLoading, error, data, refetch } = useQuery({
+        queryKey: ["gigs"],
         queryFn: () =>
-            newRequest.get(`/gig`).then((res) => {
+            newRequest.get(`/gigs?max=${maxRef.current.value}&min=${minRef.current.value}&sort=${sort}&search=${search}`).then((res) => {
                 return res.data;
             })
     })
-    console.log(data)
 
-    // const userId = data?.userId;
+    useEffect(() => {
+        refetch()
+    }, [sort])
 
-    // const {
-    //     isLoading: isLoadingUser,
-    //     error: errorUser,
-    //     data: dataUser,
-    // } = useQuery({
-    //     queryKey: ["user"],
-    //     queryFn: () =>
-    //         newRequest.get(`/users/${userId}`).then((res) => {
-    //             return res.data;
-    //         }),
-    //     enabled: !!userId
-    // })
+
+    const apply = () => {
+        refetch()
+    }
+
 
     return (
         <div className='gigs'>
@@ -54,7 +48,7 @@ const Gigs = () => {
                         <span>Budget</span>
                         <input type="number" ref={minRef} placeholder='min' />
                         <input type="number" ref={maxRef} placeholder='max' />
-                        {/* <button onClick={apply}>Apply</button> */}
+                        <button onClick={apply}>Apply</button>
                     </div>
                     <div className="right">
                         <span className="sortBy">Sort by</span>

@@ -42,13 +42,14 @@ const Navbar = () => {
                     <span>Fiverr Business</span>
                     <span>Explore</span>
                     <span>English</span>
-                    <Link to={"/login"} className="link"><span>Sign In</span></Link>
-                    {!currentUser?.isSeller && <span>Become a Seller</span>}
-                    {!currentUser && <button>Join</button>
+                    {!currentUser?.isSeller && <Link className="link" to={"/register"}>
+                        <span>Become a Seller</span>
+                    </Link>
                     }
-                    {currentUser && (
+
+                    {currentUser ? (
                         <div className="user" onClick={() => setOpen(!open)}>
-                            <img src={currentUser.img || "/img/noavatar.jpeg"} alt="" />
+                            <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
                             <span>{currentUser?.username}</span>
                             {
                                 open && (
@@ -69,6 +70,16 @@ const Navbar = () => {
                                 )
                             }
                         </div>
+                    ) : (
+                        <>
+                            <Link to={"/login"} className="link"><span>Sign In</span></Link>
+
+                            <Link className="link" to={"/register"}>
+
+                                <button className={active || pathname !== "/" ? "active" : ""} > Join</button>
+                            </Link>
+
+                        </>
                     )}
                 </div>
             </div>
