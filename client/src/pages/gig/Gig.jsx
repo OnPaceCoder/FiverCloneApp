@@ -34,7 +34,7 @@ const Gig = () => {
 
     })
 
-    console.log(dataUser)
+
     return (
         <div className='gig'>
             {isLoading ? ("loading") : error ? ("Something went wrong!") : (
