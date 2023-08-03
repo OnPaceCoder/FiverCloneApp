@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoos;
+const { Schema } = mongoose;
 const ReviewSchema = new Schema({
     gigId: {
         type: String,

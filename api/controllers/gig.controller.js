@@ -26,7 +26,7 @@ export const deleteGig = async (req, res, next) => {
     try {
 
         const gig = await Gig.findById(req.params.id);
-        console.log(typeof (gig.userId), typeof (req.userId))
+
         if (gig.userId !== req.userId) return next(createError(403, "You can delete only your gig!"))
 
         await Gig.findByIdAndDelete(req.params.id);

@@ -67,7 +67,7 @@ const Gig = () => {
                                 )}
                         <Slider slidesToShow={1} arrowsScroll={1} className="slider">
                             {data.images.map((img) => (
-                                <img src={img} />
+                                <img src={img} key={Math.random()} />
                             ))}
 
                         </Slider>

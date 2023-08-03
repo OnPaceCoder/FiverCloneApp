@@ -7,11 +7,11 @@ const MessageSchema = new Schema({
         required: true
     },
     userId: {
-        type: Stirng,
+        type: String,
         required: true,
     },
     desc: {
-        type: Stirng,
+        type: String,
         required: true
     }
 },

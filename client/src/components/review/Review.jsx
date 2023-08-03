@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import newRequest from '../../utils/newRequest'
-
+import './Review.scss'
 
 const Review = ({ review }) => {
     const { isLoading, error, data } = useQuery({
@@ -11,6 +11,8 @@ const Review = ({ review }) => {
                 return res.data
             })
     })
+
+
     return (
         <div className='reveiw'>
             {isLoading ? ("loading") : error ? ("error") : (

@@ -10,7 +10,7 @@ const ConversationSchema = new Schema({
         unique: true,
     },
     sellerId: {
-        type: Stiring,
+        type: String,
         required: true,
     },
     buyerId: {
@@ -26,7 +26,7 @@ const ConversationSchema = new Schema({
         required: true,
     },
     lastMessage: {
-        type: Stirng,
+        type: String,
         required: false
     }
 
